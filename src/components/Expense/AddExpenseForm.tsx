@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext";
+import { v4 as uuidv4 } from 'uuid'; //https://dev.to/rahmanfadhil/how-to-generate-unique-id-in-javascript-1b13
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
@@ -18,7 +19,7 @@ const AddExpenseForm = () => {
     event.preventDefault();
 
     const create = {
-      id: "",
+      id: uuidv4(),
       name: expenseItem.name,
       cost: expenseItem.cost,
     }
@@ -51,7 +52,7 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="cost"
-            value={expenseItem.cost}
+            value={expenseItem.cost || ''}
             onChange={(event) =>
               setExpenseItem({ ...expenseItem, cost: Number(event.target.value) })}>
           </input>
