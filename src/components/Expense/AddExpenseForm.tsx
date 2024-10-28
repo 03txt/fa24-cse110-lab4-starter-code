@@ -18,6 +18,10 @@ const AddExpenseForm = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (isNaN(expenseItem.cost) || expenseItem.cost <= 0) {
+      return;
+    }
+
     const create = {
       id: uuidv4(),
       name: expenseItem.name,
