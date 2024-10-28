@@ -1,22 +1,32 @@
 import React, { useState, useContext } from "react";
-import { Expense } from "../../types/types";
+import { AppContext } from "../../context/AppContext";
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
 
-  // Exercise: Create name and cost to state variables
-
   const initialExpense = {
-    id: -1,
+    id: "",
     name: "",
-    cost: "",
+    cost: 0,
   };
+
+  const { expenses, setExpenses } = useContext(AppContext);
 
   const [expenseItem, setExpenseItem] = useState(initialExpense); 
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Exercise: Add add new expense to expenses context array
+
+    const create = {
+      id: "",
+      name: expenseItem.name,
+      cost: expenseItem.cost,
+    }
+
+    setExpenses([...expenses, create]);
+
+    setExpenseItem(initialExpense);
+
   };
 
   return (
@@ -43,7 +53,7 @@ const AddExpenseForm = () => {
             id="cost"
             value={expenseItem.cost}
             onChange={(event) =>
-              setExpenseItem({ ...expenseItem, cost: event.target.value })}>
+              setExpenseItem({ ...expenseItem, cost: Number(event.target.value) })}>
           </input>
         </div>
         <div className="col-sm">
