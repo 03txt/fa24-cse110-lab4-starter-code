@@ -52,7 +52,7 @@ describe("basic functions", () => {
     fireEvent.click(screen.getByRole("button", { name: /save/i }));
 
     
-    expect(1000).toEqual(800 + 200);
+    expect(1000).toBe(30);
   });
   
 });
